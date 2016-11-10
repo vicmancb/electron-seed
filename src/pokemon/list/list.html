@@ -1,0 +1,19 @@
+<div class="container">
+    <div id="form" class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 input-group">
+            <input id="search"
+                   type="text"
+                   class="form-control"
+                   placeholder="Search for..."
+                   ng-model="$ctrl.search">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="$ctrl.find()">Go!</button>
+            </span>
+        </div>
+    </div>
+    <div class="row" id="list">
+        <pokemon-item ng-repeat="pokemon in $ctrl.pokemonList | filter: $ctrl.executeSearch"
+                    pokemon="pokemon">
+        </pokemon-item>
+    </div>
+</div>
