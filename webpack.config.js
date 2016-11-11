@@ -6,6 +6,7 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 // var less = require("!style!css!less!./file.less");
 
 /**
@@ -17,6 +18,9 @@ var isTest = ENV === 'test' || ENV === 'test-watch';
 var isProd = ENV === 'build';
 
 module.exports = function makeWebpackConfig() {
+
+
+
     /**
      * Config
      * Reference: http://webpack.github.io/docs/configuration.html
@@ -24,6 +28,9 @@ module.exports = function makeWebpackConfig() {
      */
     var config = {};
 
+    config.node = {
+        fs: "empty"
+    };
 
     /**
      * Entry
@@ -135,7 +142,10 @@ module.exports = function makeWebpackConfig() {
             // test: /\.tsx?$/,
             test: /\.ts$/,
             loader: "awesome-typescript-loader"
-        }
+        },
+        //     {
+        //     test: /src.*\.ts$/, loaders: ['ng-annotate']
+        // },
         ]
     };
 
@@ -202,13 +212,17 @@ module.exports = function makeWebpackConfig() {
 
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
             // Minify all javascript, switch loaders to minimizing mode
-            new webpack.optimize.UglifyJsPlugin(),
+            // new webpack.optimize.UglifyJsPlugin(),
 
             // Copy assets from the public folder
             // Reference: https://github.com/kevlened/copy-webpack-plugin
             new CopyWebpackPlugin([{
                 from: __dirname + '/src/public'
-            }])
+            }]),
+            new ngAnnotatePlugin({
+                add: true,
+                // other ng-annotate options here
+            })
         )
     }
 

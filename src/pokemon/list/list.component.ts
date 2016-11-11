@@ -12,7 +12,9 @@ class controller {
     listService : listService;
 
     static $inject = ['listService'];
+
     constructor(listService:listService) {
+        // "ngInject";
         this.search = '';
         this.executeSearch = '';
         this.listService = listService;

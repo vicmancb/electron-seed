@@ -6,7 +6,9 @@ import Pokemon from '../../../pokemon/models/pokemon';
 export default class PokemonService {
     pokemonList : any;
     http : any;
+    static $inject = ['$http'];
     constructor($http:any) {
+        // "ngInject";
         this.pokemonList = [];
         this.http = $http;
 

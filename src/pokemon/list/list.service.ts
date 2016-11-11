@@ -7,8 +7,9 @@ import PokemonApi from '../../shared/api/pokemon/pokemon.service';
 export default class listService {
     http: any;
     pokemonApi: PokemonApi;
-
+    static $inject = ['$http', 'pokemonService'];
     constructor($http: any, pokemonService: PokemonApi) {
+        // "ngInject";
         this.http = $http;
         this.pokemonApi = pokemonService;
     }
